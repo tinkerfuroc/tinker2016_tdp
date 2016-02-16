@@ -1,0 +1,68 @@
+\documentclass[journal,12pt,onecolumn]{IEEEtran}
+
+\usepackage{hyperref}
+
+\begin{document}
+	
+\title{Tinker@Home 2016 Team Description Paper}
+\author{\IEEEauthorblockN{Furoc (TBD)}\\
+\IEEEauthorblockA{Tsinghua University\\
+Beijing, China, 100084\\
+Homepage: \href{http://tinker.furoc.net}{http://tinker.furoc.net}}
+}
+\maketitle
+
+
+\begin{abstract}
+This paper describes our service robot Tinker of Tsinghua University, China, including the hardware design and software system. Tinker is designed to be an autonomous robot in home environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @home League of World RoboCup 2014. This paper introduces both the mechanical design of the robot and the algorithms we have proposed and implemented.
+\end{abstract}
+
+
+
+\section{Introduction}
+Tinker is developed by FuRoC (Future Robotics Club), which is a student group in Tsinghua University focusing on robotics, AI and related areas. It is our first participation in the @home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. To complete home service tasks, abilities such as automatic navigation, environment perception, interaction with human, recognizing and carrying small objects, etc, are required. Tinker is equipped with a mobile chassis, a lift platform, a 6-DoF arm, and different kinds of sensors. Depth cameras (primesense and Microsoft Kinect) are used for imaging and recognizing environment, objects and different user. A laser scanners is used for sensing the surroundings and navigation. Tinker is also equipped with a microphone for hearing and understanding voice orders.
+
+
+\section{Mechanical Design}
+include mechanical design of the chasis, robotic arm, ...
+
+
+\input{mec.tex}
+
+
+
+
+\section{Software Engineering}
+
+\subsection{Software Architecture}
+
+introduce the organization of the whole project, including how we use ROS.
+\input{arch.tex}
+
+\subsection{Computer Vision}
+include face recognition, object recognition, segmentation ...
+\input{vision.tex}
+
+\subsection{Navigation}
+include SLAM and navigation.
+\input{nav.tex}
+
+\subsection{Speech Recognition}
+\input{speech.tex}
+
+
+
+\section{Conclusion}
+
+As we have introduced in the above sections, Tinker is our young robot, with mobile chassis, Ball screw Actuator and a 6-DoF arm and various sensors in- cluding RGB cameras, depth cameras and laser range finders. We developed, implemented and adopted algorithms for Simultaneous Localization and Map- ping, face recognition, human tracking, object recognition and speech recogni- tion, with which the robot becomes intelligent and is capable for many home service tasks. As Tinker is young, there are still a lot of things to learn and improve.
+
+Citation test \cite{xia2015human}.
+
+\section*{Acknowledgement}
+To be added
+
+\bibliography{main.bib}
+\bibliographystyle{IEEEtran}
+
+
+\end{document}
