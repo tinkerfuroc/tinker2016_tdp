@@ -87,10 +87,10 @@
 \begin{document}
 	
 \title{Tinker@Home 2016 Team Description Paper}
-\author{Jiacheng Guo, Haotian Yao, Haocheng Ma, Cong Guo, Yu Dong, Yilin Zhu, Jingsong Peng, Xukang Wang, Shuncheng He, Fei Xia, Xunkai Zhang}
-\institute{Tsinghua University,
-%\newline Den Dolech 2, P.O. Box 513, 5600 MB Eindhoven, The Netherlands\\
-\texttt{http://tinker.furoc.net}}
+\author{Jiacheng Guo, Haotian Yao, Haocheng Ma, Cong Guo, Yu Dong, Yilin Zhu, Jingsong Peng, Xukang Wang, Shuncheng He, Fei Xia and Xunkai Zhang}
+\institute{Future Robotics Club(Group), Tsinghua University,  China\\
+\texttt{Homepage: http://tinker.furoc.net} \\
+\texttt{Correspondence: gjc13@mails.tsinghua.edu.cn}}
 \authorrunning{J Guo et al.}	
 %\title{Tinker@Home 2016 Team Description Paper}
 %\author{\IEEEauthorblockN{Jiacheng Guo\IEEEauthorrefmark{1}\footnote{*Team Captain}, Haotian Yao, Haocheng Ma, Cong Guo, Yu Dong, Yilin Zhu, Jingsong Peng, Xukang Wang, Shuncheng He, Fei Xia, Xunkai Zhang}\\
@@ -102,13 +102,16 @@
 
 
 \begin{abstract}
-This paper describes our service robot Tinker of Tsinghua University, China, including the hardware design and software system. Tinker is designed to be an autonomous robot in home environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @home League of World RoboCup 2016. This paper introduces both the mechanical design of the robot and the algorithms we have proposed and implemented.
+This paper describes our service robot Tinker of Tsinghua University, China, including the mechanical system, hardware system and software system. Tinker is designed to be an autonomous robot in domestic environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @Home League of World RoboCup 2016. This paper introduces both the hardware design of the robot and the algorithms we have proposed and implemented.
 \end{abstract}
 
 
-
 \section{Introduction}
+<<<<<<< HEAD
 Tinker is developed by FuRoC (Future Robotics Club), which is a student group in Tsinghua University focusing on robotics, AI and related areas. It is our third participation in the @home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. To complete home service tasks, abilities such as automatic navigation, environment perception, interaction with human, recognizing and carrying small objects, etc, are required. Tinker is equipped with a mobile chassis, a lift platform, a 6-DoF arm, and different kinds of sensors. Depth cameras (Kinect v2) are used for imaging and recognizing environment, objects and different user. A laser scanners is used for sensing the surroundings and navigation. Tinker is also equipped with a microphone for hearing and understanding voice orders.
+=======
+Tinker is developed by FuRoC (Future Robotics Club), a student group in Tsinghua University focusing on robotics, AI and related areas. It is our third participation in the @Home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. To complete home service tasks, abilities such as automatic navigation, environment perception, interaction with human, recognizing and carrying small objects, etc, are required. Tinker is equipped with a mobile chassis, a lift platform, a 6-DoF arm, and different kinds of sensors. Depth cameras (PrimeSense and Microsoft Kinect) are used for imaging and recognizing environment, objects and different user. A laser scanner is used for sensing the surroundings and navigation. Tinker is also equipped with a microphone for hearing and understanding voice orders.
+>>>>>>> master
 
 \section{Overview of the robot}
 
@@ -119,7 +122,7 @@ Tinker is developed by FuRoC (Future Robotics Club), which is a student group in
 
 \section{Software Engineering}
 \subsection{Computer Vision}
-Computer vision is indispensible for tinker to accomplish mutiple tasks including person recognition, object manipulation and environment modelling.
+Computer vision is indispensable for tinker to accomplish multiple tasks including person recognition, object manipulation and environment modeling.
 \input{vision.tex}
 
 \subsection{Navigation}
@@ -132,7 +135,9 @@ Computer vision is indispensible for tinker to accomplish mutiple tasks includin
 
 \section{Conclusion}
 
-As we have introduced in the above sections, Tinker is our young robot, with mobile chassis, Ball screw Actuator and a 6-DoF arm and various sensors in- cluding RGB cameras, depth cameras and laser range finders. We developed, implemented and adopted algorithms for Simultaneous Localization and Map- ping, face recognition, human tracking, object recognition and speech recogni- tion, with which the robot becomes intelligent and is capable for many home service tasks. As Tinker is young, there are still a lot of things to learn and improve.
+As we have introduced in the above sections, Tinker is our young robot, with mobile chassis, ball screw actuator, a 6-DoF arm and various sensors including RGB cameras, depth cameras and laser range finders. We developed, implemented and adopted algorithms for Simultaneous Localization and Mapping, face recognition, human tracking, object recognition and speech recognition. With such efforts, the robot becomes intelligent and is capable of completing a variety of home service tasks. 
+
+%As Tinker is young, there are still a lot of things to learn and improve.
 
 %Citation test \cite{xia2015human}.
 
