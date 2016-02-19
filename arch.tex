@@ -16,8 +16,8 @@ The sensors we use are:
     \item Infrared proximity sensor for manipulation
 \end{enumerate}
 \subsubsection{The hardware-communication layer}
-The hardware communication layer must be highly expandible to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the Xilinx ZYNQ soc. The ZYNQ soc then controls the motor peripheral. 
-For sensors, those which already have had a ROS wrap like Kinect, camera and laser scanner are directy connected to the laptop computer while the feedback of motors other senor messages that need further processing to become ROS messgaes are sent to ZYNQ, where ROS nodes are running to collect information and tranlate them to ROS messages.
+The hardware communication layer must be highly expandable to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the Xilinx ZYNQ soc. The ZYNQ soc then controls the motor peripheral. 
+For sensors, those which already have had a ROS wrap like Kinect, camera and laser scanner are directly connected to the laptop computer while the feedback of motors other sensor messages that need further processing to become ROS messages are sent to ZYNQ, where ROS nodes are running to collect information and translate them to ROS messages.
 \begin{figure}[!t]
 	\centering
     \includegraphics[scale=0.5]{commuication_arch.png}
