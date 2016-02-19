@@ -1,0 +1,36 @@
+Simultaneous Localization and Mapping
+SLAM is one of the most important algorithms for a mobile autonomous robot,
+which enables a robot to navigate and explore in an unknown environment [2].
+Mapping requires the robot to record, integrate and update the former information
+it have got about the surroundings while Localization requires the robot to
+know the location of itself refer to the estimated environment.
+Using a laser range finders (LRFs), we adopted the SLAM package to estimate
+the robot’s location and its surroundings in the form of 2D occupancy
+grid map. The raw data from LRFs are collected as the input of the algorithm.
+Features, or landmarks are then extracted from the environment. When the
+robot moves around, these features are used to estimate where it moves. It is
+called Laser-Scan-Matcher process. However, the estimation of this process is
+imprecise and the error accumulates. The GMapping process is adopted, using
+an EKF (Extended Kalman Filter) to correct the estimated result. Based on
+the final map generated, the robot plans its path and explores the unknown
+environment.
+We also implemented SLAM using color and depth camera, also called vSLAM
+[3], so that a 3D map can be obtained, which is more precise in complicated
+environment.
+
+Navigation
+Navigation is one of the basic function that a mobile autonomous robot must have.
+In 2D world, it should have the basic translation and rotation skills firstly.
+Secondly, the robot needs to make a plan from the start to the goal theoretically and practically.
+More, the better algorition may let the robots avoid the obstacle.
+Also, almost every complex task must have the navigation function.So we pay much attention on this part.
+As to us, we study the Navigation stack provided in ROS carefully and change 
+some part of the algorition according to our hardware environment.
+At the begining, we tune the parameters mainly in move_base package so the robot
+could almost achieve the goal even the processing is not vert satisfied.
+And we find the planner the basic navigation plan could be better. So we rewrite
+a local planner which subscribes the origin global plan and linearizes the curve.
+In this way, the whole processing could be more fluently. Besides, because of the 
+testing environment for navigation must have rviz which is not  famillar by other 
+modular group. We package the start topic and the goal topic into a node to let
+other group use navigation stack without operating rviz.
