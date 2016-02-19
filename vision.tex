@@ -23,6 +23,6 @@ Tinker uses a two-phase approach to recognize objects and precisely manipulate t
 In the second phase, the approximate location of object is given to the robot arm controller, another usb camera placed in the hand of the robot arm will guide the arm to precisely manipulate the object. First, the hand is moved to directly face the location of the region of interest at about 40 cm away. A similar image processing pipeline is used to find the object in the image given by the camera in hand. After getting the image of the object, it is matched with the pre-captured image set by convolution the image with the templates to find the best mattch. Precision of the location found in this phase is significantly improved due to a much closer camera place. Then the robot arm will be guided by the camera using a feedback procedure to place the object in the middle of the camera image. Thus, the chance of missing the object is reduced.
 
 \begin{figure}[H]
-    \includegraphics{object_found.jpg}
+    \includegraphics[scale=0.3]{object_found.jpg}
     \caption{object found from the camera}
 \end{figure}

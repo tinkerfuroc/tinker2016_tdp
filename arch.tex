@@ -18,7 +18,7 @@ The sensors we use are:
 The hardware communication layer must be highly expandible to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the Xilinx ZYNQ soc. The ZYNQ soc then controls the motor peripheral. 
 For sensors, those which already have had a ROS wrap like Kinect, camera and laser scanner are directy connected to the laptop computer while the feedback of motors other senor messages that need further processing to become ROS messgaes are sent to ZYNQ, where ROS nodes are running to collect information and tranlate them to ROS messages.
 \begin{figure}[H]
-    \includegraphics[scale=1]{commuication_arch.png}
+    \includegraphics[scale=0.5]{commuication_arch.png}
     \caption{The architecture of the hardware-communication layer}
 \end{figure}
 
