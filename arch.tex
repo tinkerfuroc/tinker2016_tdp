@@ -1,7 +1,7 @@
 \subsection{Overview of the architecture}
-Tinker system has to deal with challenges at different levels from hardware interface to artificial intelligence. Thus, a multi-level, distributed architecture based on ROS is employed to meet such requirement. The hardware layer are the motors and the sensors of the robot. The hardware-communication layer is responsible for controlling the motors and acquire information from the sensors. The output of the hardware layer is ROS-compatible sensor images including camera image, point cloud and multiple other topics. The logic layer is responsible for providing basic functions of a robot such as manipulation, navigation, human tracking, object recognition, speech recognition and synthesis etc. The decision layer listens to topics published by the logic layer and makes decision for the next high-level action to make.
+Tinker system has to deal with challenges at different levels from hardware interface to artificial intelligence. Thus, a multi-level, distributed architecture based on ROS is employed to meet such requirement. The hardware layer are the motors and the sensors of the robot. The hardware-communication layer is responsible for controlling the motors and acquiring information from the sensors. The output of the hardware layer is ROS-compatible sensor images including camera image, point cloud and multiple other topics. The logic layer is responsible for providing basic functions of a robot such as manipulation, navigation, human tracking, object recognition, speech recognition and synthesis etc. The decision layer listens to topics published by the logic layer and makes decision for the next high-level action to make.
 \subsubsection{The hardware layer}
-
+\\
 The motors we use are:
 \begin{enumerate}
     \item Times Brilliant DMS-055A motors for driving the chassis and the platform
@@ -16,8 +16,8 @@ The sensors we use are:
     \item Infrared proximity sensor for manipulation
 \end{enumerate}
 \subsubsection{The hardware-communication layer}
-The hardware communication layer must be highly expandible to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the Xilinx ZYNQ soc. The ZYNQ soc then controls the motor peripheral. 
-For sensors, those which already have had a ROS wrap like Kinect, camera and laser scanner are directy connected to the laptop computer while the feedback of motors other senor messages that need further processing to become ROS messgaes are sent to ZYNQ, where ROS nodes are running to collect information and tranlate them to ROS messages.
+The hardware communication layer must be highly scalable to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the Xilinx ZYNQ soc. The ZYNQ soc then controls the motor peripheral. 
+For sensors, those which already have had a ROS wrap like Kinect, camera and laser scanner are directy connected to the laptop computer while the feedback of motors other senor messages that need further processing to ROS messgaes are sent to ZYNQ, where ROS nodes are running to collect information and tranlate them to ROS messages.
 \begin{figure}[!t]
 	\centering
     \includegraphics[scale=0.5]{commuication_arch.png}
@@ -35,5 +35,5 @@ Most important robot functions are implemented in this layer. The main component
 \end{enumerate}
 
 \subsubsection{The decision layer}
-Decision Layer Task planning is done in decision layer. For different tasks, modules in decision layer run as state machine. They integrate different information from the low layer to judge the state they are in and then give different orders or make different responses. Each module deal with a single task, sharing the common information from the lower layers.
+Task planning is done in decision layer. For different tasks, modules in decision layer run as state machine. They integrate different information from the low layer to judge the state they are in and then give different orders or make different responses. Each module deal with a single task, sharing the common information from the lower layers.
 
