@@ -1,25 +1,108 @@
-\documentclass[journal,12pt,onecolumn]{IEEEtran}
 
-\usepackage{hyperref}
-\usepackage{changepage}
-\usepackage{float}
+%%%%%%%%%%%%%%%%%%%%%%% file typeinst.tex %%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the LaTeX source for the TDPTemplate using
+% the LaTeX document class 'llncs.cls' Springer LNAI format
+% used in the RoboCup Symposium submissions.
+% http://www.springer.com/computer/lncs?SGWID=0-164-6-793341-0
+%
+% It may be used as a template for your own TDP - copy it
+% to a new file with a new name and use it as the basis
+% for your Team Description Paper
+%
+% NB: the document class 'llncs' has its own and detailed documentation, see
+% ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[runningheads,a4paper]{llncs}
+
+% document input
+\usepackage[utf8]{inputenc}		% input encoding
+\usepackage[english]{babel}		% input language for hyphens
+
+% fonts 
+\usepackage[T1]{fontenc}		% more glyphs and a
+\usepackage{lmodern}			% better looking font
+
+% page geometry
+%\usepackage{a4wide}
+%\usepackage{a4}
+%\usepackage[left=48mm,right=46mm]{geometry}
+\usepackage[left=32mm,right=31mm]{geometry}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\setcounter{tocdepth}{3}
+
 \usepackage{graphicx}
+\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{float}
+
+\usepackage{url}
+\usepackage{listings}
+
+% *** MORE GRAHPICS ***
+\usepackage[usenames,dvipsnames]{color}     
+
+% *** BIBLIOGRAPHY PACKAGES ***
+%\usepackage{natbib}     
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}           % For tables (toprule, midrule, bottomrule)
+\usepackage{todonotes}			% should be defined after the color package
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% *** PATHS ***
+\makeatletter
+\def\input@path{{images/}		
+				}
+\makeatother
+
+\graphicspath{  {images/}
+				}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Acronym definitions
+\usepackage[acronym]{glossaries}
+\newacronym{ed}{ED}{Environment Descriptor}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{fcfg}{FCFG}{feature context free grammar}
+
+% shorthand definitions
+\newcommand{\eg}{\emph{e.g.}}						% Exemplum gratia
+\newcommand{\goal}{\mathcal{G}}						% Goal area
+\newcommand{\goallc}{\mathcal{G}_{\mathrm{lc}}}		% Subset of goal area with costs below threshold cmin
+\newcommand{\goalhc}{\mathcal{G}_{\mathrm{hc}}}		% Subset of goal area with costs above threshold cmin
+\newcommand{\ie}{\emph{i.e.}}						% Id est
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\graphicspath{{images/}}
+
+
 \begin{document}
 	
 \title{Tinker@Home 2016 Team Description Paper}
-\author{\IEEEauthorblockN{Furoc (TBD)}\\
-\IEEEauthorblockA{Tsinghua University\\
-Beijing, China, 100084\\
-Homepage: \href{http://tinker.furoc.net}{http://tinker.furoc.net}}
-}
+\author{Jiacheng Guo, Haotian Yao, Haocheng Ma, Cong Guo, Yu Dong, Yilin Zhu, Jingsong Peng, Xukang Wang, Shuncheng He, Fei Xia, Xunkai Zhang}
+\institute{Tsinghua University,
+%\newline Den Dolech 2, P.O. Box 513, 5600 MB Eindhoven, The Netherlands\\
+\texttt{http://tinker.furoc.net}}
+\authorrunning{J Guo et al.}	
+%\title{Tinker@Home 2016 Team Description Paper}
+%\author{\IEEEauthorblockN{Jiacheng Guo\IEEEauthorrefmark{1}\footnote{*Team Captain}, Haotian Yao, Haocheng Ma, Cong Guo, Yu Dong, Yilin Zhu, Jingsong Peng, Xukang Wang, Shuncheng He, Fei Xia, Xunkai Zhang}\\
+%\IEEEauthorblockA{Future Robotics Club(Group), Tsinghua University\\
+%Beijing, China, 100084\\
+%Homepage: \href{http://tinker.furoc.net}{http://tinker.furoc.net}}
+%}
 \maketitle
 
 
 \begin{abstract}
-This paper describes our service robot Tinker of Tsinghua University, China, including the hardware design and software system. Tinker is designed to be an autonomous robot in home environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @home League of World RoboCup 2014. This paper introduces both the mechanical design of the robot and the algorithms we have proposed and implemented.
+This paper describes our service robot Tinker of Tsinghua University, China, including the hardware design and software system. Tinker is designed to be an autonomous robot in home environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @home League of World RoboCup 2016. This paper introduces both the mechanical design of the robot and the algorithms we have proposed and implemented.
 \end{abstract}
 
 
@@ -32,7 +115,6 @@ Tinker is developed by FuRoC (Future Robotics Club), which is a student group in
 \input{arch.tex}
 
 \section{Mechanical Design}
-include mechanical design of the chasis, robotic arm, ...
 \input{mec.tex}
 
 \section{Software Engineering}
@@ -52,10 +134,10 @@ Computer vision is indispensible for tinker to accomplish mutiple tasks includin
 
 As we have introduced in the above sections, Tinker is our young robot, with mobile chassis, Ball screw Actuator and a 6-DoF arm and various sensors in- cluding RGB cameras, depth cameras and laser range finders. We developed, implemented and adopted algorithms for Simultaneous Localization and Map- ping, face recognition, human tracking, object recognition and speech recogni- tion, with which the robot becomes intelligent and is capable for many home service tasks. As Tinker is young, there are still a lot of things to learn and improve.
 
-Citation test \cite{xia2015human}.
+%Citation test \cite{xia2015human}.
 
 \section*{Acknowledgement}
-To be added
+The authors of this paper would like to thank previous team members of Tinker@Home 2014 and Tinker@Home2015 for their help and support through out building the robot and writing this manuscript. The authors would also like to thank Seagate for their funding. 
 
 \bibliography{main.bib}
 \bibliographystyle{IEEEtran}
