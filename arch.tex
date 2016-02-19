@@ -1,7 +1,7 @@
 \subsection{Overview of the architecture}
 Tinker system has to deal with challenges at different levels from hardware interface to artificial intelligence. Thus, a multi-level, distributed architecture based on ROS is employed to meet such requirement. The hardware layer are the motors and the sensors of the robot. The hardware-communication layer is responsible for controlling the motors and acquiring information from the sensors. The output of the hardware layer is ROS-compatible sensor images including camera image, point cloud and multiple other topics. The logic layer is responsible for providing basic functions of a robot such as manipulation, navigation, human tracking, object recognition, speech recognition and synthesis etc. The decision layer listens to topics published by the logic layer and makes decision for the next high-level action to make.
 \subsubsection{The hardware layer}
-\\
+
 The motors we use are:
 \begin{enumerate}
     \item Times Brilliant DMS-055A motors for driving the chassis and the platform
