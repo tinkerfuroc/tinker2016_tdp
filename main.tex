@@ -45,6 +45,11 @@
 \usepackage{hyperref}
 \usepackage{listings}
 
+\usepackage{ctex}
+\usepackage{setspace}
+
+\renewcommand{\baselinestretch}{1.15}
+
 % *** MORE GRAHPICS ***
 \usepackage[usenames,dvipsnames]{color}     
 
@@ -88,7 +93,7 @@
 
 \begin{document}
 	
-\title{Tinker@Home 2017 Team Description Paper}
+\title{Tinker@Home 2019 Team Description Paper}
 \author{Jiacheng Guo, Haotian Yao, Haocheng Ma, Yuan Dong, Yilin Zhu, Jingsong Peng, Xukang Wang and Xiaojian Ma}
 \institute{Future Robotics Club(Group), Tsinghua University,  China\\
 \texttt{Homepage: http://tinker.furoc.net} \\
@@ -96,17 +101,14 @@
 \authorrunning{J Guo et al.}	
 \maketitle
 
-
 \begin{abstract}
-This paper describes our service robot Tinker of Tsinghua University, China, including the mechanical system, hardware system and software system. Tinker is designed to be an autonomous robot in domestic environment, capable of navigating in complicated environment and finishing different tasks, mainly following the rules of @Home League of World RoboCup 2017. This paper introduces both the hardware design of the robot and the algorithms we have proposed and implemented.
+This paper describes a intelligent robot named Tinker of Tsinghua University, China, including the mechanical system, hardware system and software system. Tinker is designed to be an autonomous robot in housekeeper and domestic environment, capable of navigating in complicated environment and finishing different tasks, aiming following the rules of @Home League of World RoboCup 2019. This paper gives the hardware design of the robot and the algorithms we have proposed and implemented.
 \end{abstract}
 
-
 \section{Introduction}
-Tinker is developed by FuRoC (Future Robotics Club), which is a student group in Tsinghua University focusing on robotics, AI and related areas. It is our third participation in the @home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. To complete home service tasks, abilities such as automatic navigation, environment perception, interaction with human, recognizing and carrying small objects, etc, are required. Tinker is equipped with a mobile chassis, a lift platform, a 6-DoF arm, and different kinds of sensors. Depth cameras (Kinect v2 and primesense) are used for imaging and recognizing environment, objects and different user. A laser scanners is used for sensing the surroundings and navigation. Tinker is also equipped with a microphone for hearing and understanding voice orders.
+More Convenient home service is a research hotspot these years, which calls for a more smart and reliable robot. With the best interet in robot, Tinker is created by us FuRoC (Future Robotics Club), a student interest group in Tsinghua University focusing on robotics, AI and related areas. It is our forth participation in the @home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. The capability such as automatic navigation, environment perception, interaction with human, vision recognizing and objects carrying, etc, are necessary. Tinker is equipped with a agile mobile chassis using 4 mecanum wheels, a UR5 robotic arm ,a powerful  mechanical claw (Robotiq-G85), and different kinds of sensors. Depth cameras (Kinect v2 and realsense d435i) are used for imaging and recognizing environment, objects and different people. 3 Laser radars  are used for sensing the surroundings and navigation. To confirm the objects grabbing, the claw is equipped with a Laser transmitter and receiver sensor.
 
 \section{Overview of the robot}
-
 \input{arch.tex}
 
 \section{Mechanical Design}
@@ -137,9 +139,9 @@ Our team repository can be found at \url{https://github.com/tinkerfuroc}. The re
     \item \href{www.ros.org}{ROS}
     \item \href{github.com/ros-planning/navigation}{ROS Navigation Stack}
     \item \href{github.com/code-iai/iai\_kinect2}{iai\_kinect2}
-    \item \href{github.com/pjreddie/darknet}{darknet(YOLO9000)}
+    \item \href{github.com/pjreddie/darknet}{darknet(tensorflow fast yolo)}
     \item \href{www.tensorflow.org}{tensorflow}
-    \item \href{www.faceplusplus.com}{face++ Face API}
+    \item \href{www.faceplusplus.com}{face++}
 \end{enumerate}
 
 
@@ -148,7 +150,7 @@ Our team repository can be found at \url{https://github.com/tinkerfuroc}. The re
 %Citation test \cite{xia2015human}.
 
 \section*{Acknowledgement}
-The authors of this paper would like to thank previous team members of Tinker@Home 2014 and Tinker@Home2015 for their help and support through out building the robot and writing this manuscript. The authors would also like to thank Seagate and DJI for their funding. 
+The authors of this paper would like to thank previous team members of Tinker@Home 2014, Tinker@Home2015, Tinker@Home2017 for their help and support through out building the robot and writing this manuscript. The authors would also like to thank Google, IFLYTEK, Questyle Audio, and Mech-Mind, for their material or technology support. 
 
 
 \bibliography{main.bib}
