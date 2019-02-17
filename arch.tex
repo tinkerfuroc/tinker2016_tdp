@@ -14,7 +14,7 @@ The mechanism we use are:
 \begin{enumerate}
     \item DJI M3058P19 motors for driving the chassis and the platform.
     \item Universal-Robots UR5 robot arm for accessing objects.
-    \item Robotiq-G85 mechanical claw.
+    \item Robotiq-G85 mechanical gripper.
 \end{enumerate}
 
 Sensors we use are:
@@ -35,7 +35,7 @@ Sensors we use are:
 The hardware communication layer must be highly scalable to quickly install and remove different sensors and executors. All control commands of the robot are sent to the ROS nodes running on the laptop. Laptop also collect the information collected by the various sensors and control mechanical operations.
 \begin{figure}[!t]
 	\centering
-    \includegraphics[scale=0.5]{commuication_arch.png}
+    \includegraphics[scale=1]{commuication_arch.png}
     \caption{The architecture of the hardware-communication layer}
     \label{arch_comm}
 \end{figure}
