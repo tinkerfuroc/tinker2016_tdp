@@ -1,5 +1,5 @@
 \subsection{Overview of the architecture}
-Tinker system has to deal with challenges at different levels from hardware interface to artificial intelligence. Thus, a multi-level, distributed architecture based on ROS is employed to meet such requirement. The hardware layer contains a singlechip driving the motors and the sensors. The hardware-communication layer is responsible for controlling the motors and acquiring information from the sensors. The output of the hardware layer is ROS-compatible sensor images including camera image, point cloud and multiple other topics. The logic layer is responsible for providing basic functions of a robot such as manipulation, navigation, human tracking, object recognition, speech recognition and synthesis etc. The decision layer listens to topics published by the logic layer and makes decision for the next high-level action to make.
+Tinker system has to deal with challenges at different levels from hardware interface to artificial intelligence. Thus, a multi-level, distributed architecture based on ROS is employed to meet such requirement. The hardware layer contains a embedded board driving motors and preprocessing odometry data. The hardware-communication layer is responsible for controlling the motors and acquiring information from the sensors. The output of the hardware layer is ROS-compatible sensor images including camera image, point cloud and multiple other topics. The logic layer is responsible for providing basic functions of a robot such as manipulation, navigation, human tracking, object recognition, speech recognition and synthesis etc. The decision layer listens to topics published by the logic layer and makes decision for the next high-level action to accomplish the task.
 
 \subsubsection{The hardware layer}
 \ 
@@ -17,7 +17,7 @@ The mechanism we use are:
     \item Robotiq-G85 mechanical claw.
 \end{enumerate}
 
-The sensors we use are:
+Sensors we use are:
 \begin{enumerate}
     \item Hokuyo URG04LX laser scanner for navigation
     \item Hokuyo UTM30 laser scanner for navigation
@@ -48,7 +48,7 @@ Most important robot functions are implemented in this layer. The main component
     \item Navigation: Mapping, localization, route-planning and collision avoidance
     \item Vision: Human recognition, object recognition and their tracking.
     \item Speech: Speech recognition and synthesis
-    \item Move it: Manipulation with feedback from vision and laser
+    \item Manipulation: Robot arm planing with feedback from vision and laser
 \end{enumerate}
 
 \subsubsection{The decision layer}

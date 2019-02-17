@@ -1,5 +1,4 @@
-This year, it is adopted the API provided by Google. ASR, the full name is Automated Speech Recognition, that is, automatic speech recognition technology. 
-It is a technology that converts human voice into text. 
-TTS,full name is TextToSpeech, that is, text-to-speech conversion, also known as computer speech synthesis, its process is to convert arbitrary words in the computer into natural and smooth speech output.            ASR uses stream-based processing to upload audio to the Google cloud for parsing and real-time feedback of corresponding text.
-Intelligent operation in TTS works without networking. Dialogue system consists of a simple neural network, which takes keywords to operate task switches: When the software recognizes a sequence of special keywords, the robot interprets one's intention and makes corresponding responses. 
-Sound source localization method is from IFLYTEK. 
+For 2019 competition, we implement speech interaction system based on google TTS(Text-To-Speech) and STT(Speech-To-Text) Cloud API. To overcome communication delay from robot and cloud platform, we realize a stream based audio transfrom method for speech recognition. Moreover, Tinker caches a huge amount of audio response template locally to accelerate robot correspondance.
+
+After speech to text layer, dialogue system consists of a simple keyword parser, which takes keywords in certain patterns to operate task switches: When the software recognizes a sequence with one of the predefined patterns, the robot interprets one's intention and makes corresponding responses. Sound source localization method is realized by IFLYTEK develop toolkit.
+
