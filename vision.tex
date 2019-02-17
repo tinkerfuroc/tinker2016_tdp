@@ -32,3 +32,19 @@ more than 35Hz for 640*480 point clouds, which to the best of
 our knowledge is much faster than state-of-the-art algorithms.
 
 For object classification, another image processing pipeline is implemented. We used fast YOLO \cite{1612.08242} for general object type detection. fast YOLO is a light-weight while precise nerual network for genral object detection and classification. Then we implemented a bag of words model \cite{csurka2004visual} to pair the object image with those collected in the library.
+\begin{figure} 
+	\centering 
+	\subfigure[Origin 1]{\label{fig:subfig:a}
+		\includegraphics[width=0.385\linewidth]{images/1.png}}
+	\hspace{0.01\linewidth}
+	\subfigure[Result 1]{\label{fig:subfig:b}
+		\includegraphics[width=0.45\linewidth]{images/1.jpg}}
+	\vfill
+	\subfigure[Origin 2]{\label{fig:subfig:a}
+		\includegraphics[width=0.38\linewidth]{images/2.png}}
+	\hspace{0.01\linewidth}
+	\subfigure[Result 2]{\label{fig:subfig:b}
+		\includegraphics[width=0.465\linewidth]{images/2.jpg}}
+	\caption{Objects recoginitions show}
+	\label{fig:subfig}
+\end{figure}
