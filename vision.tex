@@ -7,7 +7,7 @@ For human-robot interaction, a robot is required to recognize different masters 
 We used face++ supported by Questyle Audio for face detection and implemented the face recognition algorithm based on sparse representation \cite{wright2009robust}. A redundant dictionary is trained offline using a set of training faces. The algorithm seeks the most sparse representation coefficient by solving a L1 optimization problem. The residual errors for different classes (persons) tell who is the unknown person: if the residual error for a specific class, for example, person A, is smaller than a specified threshold and the errors for other classes are larger than another specified threshold, the newcoming person is identified as person A. Fig.4 shows an example of the face recognition result. More details of this face recognition pipeline can be found in \cite{xia2015human}.
 \begin{figure}[H]
 	\centering
-    \includegraphics[scale=0.5]{face.png}
+    \includegraphics[scale=0.6]{face.png}
     \caption{face recognition}
 \end{figure}
 \subsubsection{Object recoginition}
@@ -34,17 +34,12 @@ our knowledge is much faster than state-of-the-art algorithms.
 For object classification, another image processing pipeline is implemented. We used fast YOLO \cite{1612.08242} for general object type detection. fast YOLO is a light-weight while precise nerual network for genral object detection and classification. Then we implemented a bag of words model \cite{csurka2004visual} to pair the object image with those collected in the library.
 \begin{figure} 
 	\centering 
-	\subfigure[Origin 1]{\label{fig:subfig:a}
+	\subfigure[Origin]{\label{fig:subfig:a}
 		\includegraphics[width=0.385\linewidth]{images/1.png}}
 	\hspace{0.01\linewidth}
-	\subfigure[Result 1]{\label{fig:subfig:b}
+	\subfigure[Result]{\label{fig:subfig:b}
 		\includegraphics[width=0.45\linewidth]{images/1.jpg}}
 	\vfill
-	\subfigure[Origin 2]{\label{fig:subfig:a}
-		\includegraphics[width=0.38\linewidth]{images/2.png}}
-	\hspace{0.01\linewidth}
-	\subfigure[Result 2]{\label{fig:subfig:b}
-		\includegraphics[width=0.465\linewidth]{images/2.jpg}}
 	\caption{Objects recoginitions show}
 	\label{fig:subfig}
 \end{figure}
