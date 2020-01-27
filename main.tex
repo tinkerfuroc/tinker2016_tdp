@@ -12,10 +12,10 @@
 %
 % NB: the document class 'llncs' has its own and detailed documentation, see
 % ftp://ftp.springer.de/data/pubftp/pub/tex/latex/llncs/latex2e/llncsdoc.pdf
-%
+%\part{title}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[runningheads,a4paper]{llncs}
+\documentclass[runningheads,UTF8,fntef,a4paper]{llncs}
 
 % document input
 \usepackage[utf8]{inputenc}		% input encoding
@@ -45,12 +45,14 @@
 \usepackage{hyperref}
 \usepackage{listings}
 
+\usepackage{cite}
+
 \usepackage{ctex}
 \usepackage{setspace}
  \usepackage{graphicx} 
  \usepackage{subfigure}
  
-\renewcommand{\baselinestretch}{1}
+\renewcommand{\baselinestretch}{1.5}
 
 
 % *** MORE GRAHPICS ***
@@ -96,50 +98,160 @@
 
 \begin{document}
 	
-\title{Tinker@Home 2019 Team Description Paper}
-\author{Jianghao Huo, Xinyu Han, Junda Bi, Haocheng Ma, Renjie Ma, Cuijie Xu, Lubin Ye, Han Zhang, Tengfei Zhang, Zijian Zhang and Yao Jiang}
-\institute{Future Robotics Club(Group), Tsinghua University,  China\\
-\texttt{Homepage: http://tinker.furoc.net} \\
-%\texttt{Email: jiangyaonju@126.com} \\
-\texttt{Correspondence: robocup-tinker@googlegroups.com}}
-\authorrunning{J Huo et al.}	
+\title{Tinker@Home 2020 Team Description Paper
+\author{Jianghao Huo, Xinyu Han, Cuijie Xu, Robin Ananda, Tengfei Zhang, Xuelin Sun, Zijian Zhang, Dik HinLeung, YanjunJiang, Shanglin Yang, Ziwei Ning, Haocheng Ma}\quad\\
+\institute{Tinker(Group), Tsinghua University, China\quad\\Homepage: http://tinker2020.furoc.club\quad\\Correspondence: robocup-tinker@googlegroups.com} 
+%\institute{Homepage: http://tinker2020.furoc.club}\quad\\
+%\institute{Correspondence: robocup-tinker@googlegroups.com}\quad\\
+}
+\authorrunning{J. H. et al.}
 \maketitle
 
 \begin{abstract}
-This paper describes an intelligent robot named Tinker of Tsinghua University, China, including the mechanical system, hardware system and software system. Tinker is designed to be an autonomous robot in domestic environment, capable of navigating and manipulating in complicated environment with friendly interaction interface, aiming to accomplish the tasks of @Home League of World RoboCup 2019. This paper gives the hardware and software design we have proposed and implemented.
+In this paper, we describe the joint effort of the Team of Tinker in the past year. RoboCup@HOME consists of a settled set of benchmarking tests that cover multiple skills needed by domestic service robots. We present the hardware chosen, the approaches used and the system established to accomplish the tasks assigned in the paper, and also improvements achieved since RoboCup@HOME 2019. It includes a framework for behavior modeling and communication employed between robot and humans, as well as the policy decisions made within the robot itself. We describe our main contributions in arranging the logical model, integrated with various open source algorithm.
 \end{abstract}
-
+\begin{small}
+\textbf{Keywords: RoboCup@Home, RoboCup,  Domestic service robotics, Tinker@Home}	
+\end{small}
 \section{Introduction}
-Automatic home service is a research hotspot these years, which calls for a more intelligent and reliable robot. With the best interest in robot, Tinker is created by FuRoC team (Future Robotics Club), a student club from Tsinghua University focusing on robotics, AI and related fields. Robocup@HOME 2019 is our forth participation in the @home League of World RoboCup. Tinker is designed to be an autonomous humanoid robot mainly for home service. The capability such as automatic navigation, environment perception, interaction with human, vision recognizing and objects carrying, etc, are necessary. Tinker is equipped with a agile mobile chassis using 4 mecanum wheels, a UR5 robotic arm ,a powerful  mechanical gripper (Robotiq-G85), and various types of sensor. Depth cameras (Kinect v2 and realsense d435i) are used for imaging and recognizing environment, objects and people. 2 laser range-finders and 1 3D Lidar are used for environment perception and obstacle avoidance. To confirm the objects grabbing, the gripper is equipped with a Laser transmitter and receiver sensor.
+The RoboCup@Home competition \cite{TP-toolbox-web} aims at bringing robotic platforms to use in realistic domestic environments. In contrast to other leagues like soccer – which predefine and standardize the playing field – in Robocup@HOME, robots need to deal with different apartment layouts, continuously changing surroundings, unknown sites, unstructured public spaces, and interacting or cooperating with humans who are only very briefly – or not at all, in many situations – instructed about how to interact with the robot. How could a robot manage all these requirements, and in the meantime, deals with any possible exception or interference during the tasks is the main problem that teams participating in RoboCup@HOME have to deal with.
+Future Robotics Club, or FuRoC team in short, develops a student club that is made up of undergraduates from Tsinghua University, focusing on domestic robots, artificial intelligence tech and the related fields. Robocup@HOME 2020 will be our sixth participation in the @home League of RoboCup. Our team has come through great reform at the technical research level since last year, and thus the upgraded Tinker is somehow new to the stage.
+\section{RoboCup@HOME}
+The RoboCup@Home league \cite{TP-toolbox-web} aims at bringing robots into domestic environments and support people in daily scenarios.
+The Open Platform Leagues are provided with the possibility to customize their robots and also the possibility to be portable within the limitation defined by the rulebook.
+Tinker (see Fig. 1) the robot is designed for the competition of the Open Platform League. The overall height of Tinker is ≈ 140 cm. The overall weight of Tinker is ≈ 70 kg.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=0.8]{Tinker_pho.png}
+	\caption{The robot Tinker in the front view (left) and Tinker in the side view (right).}
+	\label{Tinker_ph}
+\end{figure}
+\section{Layer}
+Tinker is designed to be an autonomous humanoid robot mainly for domestic service. It is equipped with a agile mobile chassis using 4 mecanum wheels, a UR5 robotic arm is, a powerful gripper (Robotiq-2F140), and various types of sensor. Depth cameras (Kinect v2) are used for imaging and recognizing environment, objects and people. Furthermore, an additional camera (realsense d435i) is assembled to the gripper, which assists the head mounted camera while grasping. A single-line laser (UTM-30LX) is used in observing the environment and avoiding obstacles.
+From hardware interference to artificial intelligence decision making, Tinker has to deal with challenges at diﬀerent levels. Thus, a multi-level, distributed structure based on the ROS platform  (see Fig. 2) is employed to meet such need. The hardware layer contains an embedded board driving motors and preprocessing odometry data. The hardware-communication layer is responsible for the overall control of the motors and the collection of data from the sensors. The output of the hardware layer is the ROS-compatible-sensor images, including camera images, point clouds and multiple other topics. The logic layer is in charge of providing basic functions of Tinker such as manipulation, navigation, person tracking, object recognition, speech understanding and synthesis etc. The decision layer serves as the collector of topics published by the logic layer and decision maker for the next integrated action to accomplish the task.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=0.5]{hardw_comm.png}
+	\caption{The theoretical structure of the hardware-communication layer}
+	\label{har_com}
+\end{figure}
 
-\section{Overview of the robot}
-\input{arch.tex}
+\subsection{The Layers}
 
-\section{Mechanical Design}
-\input{mec.tex}
+The power management(see Fig. 3) we use are:
+\begin{enumerate}
+	\item 6-cell li-ion battery 22.2V.
+	\item Voltage Booster 48V, Voltage Regulator 19V, Voltage Regulator 12V transforming power for the other equipments.
+\end{enumerate}
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=0.8]{power_sys.png}
+	\caption{Power system diagram}
+	\label{pow_sys}
+\end{figure}
 
-\section{Software Engineering}
-\subsection{Computer Vision}
-Computer vision is indispensable for tinker to accomplish multiple tasks including person recognition, object manipulation and environment modeling.
-\input{vision.tex}
+The mechanism we use are:
+\begin{enumerate}
+	\item DJI GM6020 motors for driving the chassis and the platform.
+	\item Universal-Robots UR5 robot arm for accessing objects.
+	\item Robotiq-2f140 mechanical gripper.
+\end{enumerate}
+
+Sensors we use are:
+\begin{enumerate}
+	\item Hokuyo UTM30 laser scanner for navigation
+	\item Kinect v2 depth camera for navigation and object detection
+	\item Realsense D435I camera for object recognition and detection
+	\item Encoder on motors for motor controlling
+\end{enumerate}
+
+\subsection{The hardware-communication layer}
+The hardware-communication layer must be highly scalable to quickly install and uninstall diﬀerent executors of the sensors. All control commands of the robot are sent to ROS nodes that are running on the laptop. The laptop also gathers the data collected by the sensors and give orders to the mechanical sections.
+
+\subsection{The logic layer}
+Most important robot functions are implemented in this layer. 
+The main components in this layer include:
+\begin{enumerate}
+	\item Navigation: Mapping, localization, route-planning and collision avoidance
+	\item Vision: Human recognition, object recognition and their tracking.
+	\item Speech: Speech recognition and synthesis
+	\item Manipulation: Robot arm planing with feedback from vision and laser
+\end{enumerate}
+
+\subsubsection{The decision layer}
+Task planning is done in decision layer. The modules in the decision layer are run as state machines. They integrate the data uploaded from the lower layers to decide which state they are in, and then give diﬀerent orders or make diﬀerent responses. Each module deal with just one single task, and share the same information from the lower layers.
+
+\section{Hardware}
+
+\subsection{Chassis}
+Owing to the Mecanum wheels, Tinker is capable of moving in all directions without having to turn around. For safety reason, the speed is limited to no more than 0.25m/s. Compared with the locomotion system in the past, the most important difference is the actuators. The new actuators make far less noise than the former ones because they don't have gearbox inside. Thus Tinker can operate more quietly, which makes it more user-friendly. The chassis (see Fig. 3) consists of 4 separated Mecanum wheel systems, each of which is made up of a Mecanum wheel attached with DJI M3958P19 motor. The laptop sends order to the embedded board to control the chassis as they move along trajectory planed by the ROS Manipulation logic layer. The chassis has a size of $800\text{mm} \times 500\text{mm}\times 200\text{mm}$.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=0.08]{images/chasis.png}
+	\caption{The Chassis}
+	\label{chas}
+\end{figure}
+
+\subsection{Robot arm and hand}
+The arm and hand is the most major part of the robot. We choose Universal Robotic 5 (UR5) as its arm for its length and power meets the need to hold most of the objects at home, and Robotiq-2f140 as its hand for it gives a reliable grasping. A Realsense attached at the end of arm is used to object relocalization.
+
+\subsection{Head Mounted Camera \& Hand Camera}
+We choose Kinectv2 as the head camera, providing the central processor with point source and depth images to navigate as well as detect targets, and Realsense D435i as the hand camera, assisting in object detection and recognition.
+
+
+\section{Approach}
+\subsection{Human Tracking}
+For human tracking and following, we implemented the TLD (Track Learning Detection) algorithm \cite{Kalal}. TLD was originally proposed by Zdenek Kalal in 2010. Currently it has developed to be one of the frontier real time tracking algorithms. Apart from combining the traditional tracking and detecting algorithms, it is more robust when taking into consideration the distortion and partial occlusions. The algorithm consists of three modules as its name indicated. The Tracking Module estimates the moving direction of the object according to the diﬀerence between two adjacent frames. The Detection Module detect the object in each frame independently. The Learning Module integrates the results of the Tracking Module and Detection Module to correct the detection errors and update the features of the target object. The algorithm is applied to human tracking and following tasks. Before the robot starts tracking, the human partner that is to be followed will be asked to stand in front of Tinker so that it can record his/her features. Once the record is done, the robot will track and keep up with him. Tinker also uses the depth information to keep itself a safe distance away from the instructor. Moreover, Kinect camera is used to analyze human skeleton, make simple recognition and understand of body language.
+
+\subsection{Face Recognition}
+In order to support human-robot interaction, the robot is required to recognize diﬀerent masters or guests in domestic service. We established a face recognition system with two steps: enrollment and recognition. During the enrollment section, a person will be asked to stand in front of the RGB camera. The face detector based on Haar feature from OpenCV is applied and the detected feature will be stored. For a single being, the system stores 3-5 pictures. We implemented the face recognition algorithm based on sparse representation. A redundant dictionary is trained oﬄine with a set of pre-imported faces. The algorithm seeks the most sparse representation coeﬃcient by solving a L1 optimization problem. The residual errors for diﬀerent classes (persons) will tell who is the unknown person: if the residual error for a specific class, for example, person A, is smaller than a specified threshold, and the errors for other classes are larger than another specified threshold, the newcoming person is identified as person A. More details of this face recognition pipeline can be found in \cite{wright2009robust,xia2015human}.
+
+\subsection{Object Recognition}
+Tinker uses a two-phase approach to recognize objects and precisely manipulate them. In the first phase, a point cloud is built according to the features collected by the Kinect depth camera, and we use Fast Plane Extraction in Organized Point Clouds \cite{7866503} inside. In simple terms, it is to extract the object from the two-dimensional picture, use the ransac and least square method to fit its shape parameters, and use the known three-dimensional spatial position information to reproject it into the three-dimensional space. The real-time plane extraction in 3-dimension point clouds is crucial to many robotics applications. We present an innovative algorithm to reliably detect multiple planes in organized point clouds obtained from devices - such as Kinect sensors, in real time. By uniformly dividing such a point cloud into non-overlapping groups of points in the image space, we are able to construct a graph in which the nodes and edges represent a group of points and their neighborhood respectively. We then perform an hierarchical clustering on this graph to systematically merge nodes that belong to the same plane until the squared error of the plane fitting mean exceeds a threshold. Finally we refine the extracted planes using pixel-wise region growing. Our experiments demonstrate that the proposed algorithm can reliably detect all major planes in the scene at a frame rate of more than 15Hz (for point clouds generated by 640*480 depth images), which is much faster than many other algorithms we know.
+For object classification, another image processing method is implemented. We use fast YOLO \cite{1612.08242} for general object type detection, which is a precise while light-weight neural network, designed for general object detection and classification. Then we implemented the Word Bag Model \cite{csurka2004visual} to pair the object image with those collected in the data base.
+
+\subsection{SLAM}
+SLAM is a set of algorithms that enables a robot to explore in an unknown environment \cite{grisetti2007improved}. The Mapping task requires the robot to record, integrate and update the information it collected about the surroundings while the Localization task requires the robot to identify its own location, refering to the estimated environment. Using a laser range finders (LRFs), we adopted the SLAM package to produce 2D occupancy grid map of the space. The raw data from LRFs are collected as the input stream. Features, or landmarks, are also extracted from the environment. When Tinker moves around, these features are used to estimate its location. It is called the Laser-Scan-Matcher process. However, the estimation of this process is imprecise and the error accumulates. The GMapping process is adopted \cite{1570477}, assisting by the EKF (Extended Kalman Filter) to correct the estimated result and draw the map \cite{Grisetti}.
 
 \subsection{Navigation}
-\input{nav.tex}
+Navigation is one of the basic capability that a domestic robot must acquire. Based on the generated map, the robot needs to plan the route from its current position to the target one. Considering both distance and collision avoidance, the A* algorithm is adopted to find the route. Moreover, the robot must be able to handle unexpected obstacles when moving around. Thus, the navigation package is applied and modified for Tinker so that parameters in the move-base package are tuned and the navigation task can be achieved functionally. [] However, the behavior and speed is far from satisfactory. We now extend a local package which subscribes the global plan from the origin and linearizes the curve. In this way, the whole process becomes much more fluent. To avoid small objects, the robot is equipped with depth cameras - including a kinect2 and - to build another local obstacle layer. Since the pointcloud tend to be noisy, we introduce a filter to this obstacle layer to achieve more stable navigation performance, and a social layer is added to classify Bayesian data. Once a person enters the sight of the camera, he will be identified something alive and tagged. Even if he leaves the sight of the camera, he will be marked in the clustering model formed by radar to provide better eﬀect for obstacle avoidance.
 
-\subsection{Speech Recognition}
-\input{speech.tex}
+\subsection{Speech Recognition \& Understanding}
+ForFor 2020 competition, we implement speech interaction system based on Google TTS(Text-To-Speech) and STT(Speech-To-Text) Cloud API [11]. To overcome the delay of communication between the robot and cloud platform, we import a stream based on audio transform method for speech recognition. Moreover, Tinker caches a huge amount of audio response template locally to speed up the robot reaction.
+Apart from the Speech-to-text layer, the dialogue system also contains a simple keyword parser, which takes keywords in certain patterns to operate task switches. Once the software recognizes a sequence with one of the predefined patterns, the robot will interpret one’s intention and makes responses.
+
+\subsection{Manipulation}
+Tinker implements the manipulation based on MoveIt!, a ROS-based manipulation framework for the motion planning of robotic arms. In order to balance the grasp function diversity and development speed, we design a 3-step pipeline to organize the object recognition, maintain the environment and plan the arm joint.
+The front-end of the pipeline is the object detection part, in which we detect both the target object and the obstacles that may cause collision. Then we broadcast the detection result through multiple ROS topics and services, which would be subscribed or called by the second step -- the environment maintenance part. The second part will gather all related information of objects, including targets and obstacles, then analyzes them by size, shape, location and pose, publish useful objects information into MoveIt! PlanningInterface, and decide whether or not to trigger the arm planning. After that is the back-end of the whole pipeline, in which we’ll generate a valid joint trajectory and control UR5 and gripper to complete it as accurate and fast as possible.
+The 3-step pipeline has been proved easy-to-use and well-worked in real world experiment. Tinker could achieve challenging tasks such as pick powder from a small box. (see Fig. 5)
+\begin{figure}[!t]
+	\centering
+	\includegraphics[scale=1.2]{images/Tinker.png}
+	\caption{Tinker Picking Up Matcha Powder in RoboCup@HOME 2019}
+	\label{Tinker}
+\end{figure}
+
+\section{Summary \& Prospect}
+In this paper we introduced our team and the robot, gave a brief outlook of RoboCup@Home, described the layer of Tinker, and its hardware and software system. A major focus was set on the description of the algorithm approaches. We proposed a novel approach for detecting multiple planes in organized point clouds, and we have proved it to be more efficient. We now focus on two topics: computer-human interaction through gestures and facial expressions and the visual SLAM loop closure detection based on neural network. For the former one, the majority of the researches and applications now put emphasis on how the robot can better understand human, while actually, communication is something bi-directional. Thus, how human can understand what the robot want to “express” is also crucial. Moreover, apart from words, gesture is a very important method to exchange ideas. For the latter one, compared with the traditional Bag of Words algorithm, the design of the neural network-based relocation algorithm is greatly simplified. The idea is more natural, and it is hoped to obtain better performance than the traditional relocation algorithm. 
 
 \bibliography{main.bib}
 
 \newpage
 
-\section{Team repository}
+\subsection{Team repository}
 Our team repository can be found at \url{https://github.com/tinkerfuroc}. The repository may be of help to other teams by providing:
 \begin{enumerate}
     \item Implementation of all the algorithms and needed parameters described in the paper
     \item Robot setup scripts and tools
     \item Code for RoboCup@Home tasks 
 \end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.2]{github.jpg}
+	\caption{Github Development Team}
+	\label{git}
+\end{figure}
 
 \section{3rd Party Dependencies}
 \begin{enumerate}
@@ -156,15 +268,12 @@ Our team repository can be found at \url{https://github.com/tinkerfuroc}. The re
 
 %Citation test \cite{xia2015human}.
 
-\section*{Acknowledgement}
-The authors of this paper would like to thank previous team members of Tinker@Home 2014, Tinker@Home2015, Tinker@Home2017 for their help and support through out building the robot and writing this manuscript. Particular thanks to old members Jingsong Peng, Jiacheng Guo and Yilin Zhu.
- The authors would like to thank Wenhao Ding, Laixi Shi, Zhaoyuan Gu ,Gang Li and Shuo Yang, our lead teachers Yu Wang and Yao Jiang, teachers Yanxiong E, Xiaoliang Zhu in Youth League Committee of Tsinghua University and would specially thank Mech-Mind, for their exclusive sponsorship and Questyle Audio for their technology support. At last, Team leader Han Zhang's personal thanks to Linbo Fu: without her help, I may never be able to lead this team.
+\subsubsection{Acknowledge}
+The authors of this paper would like to thank previous team members of Tinker@Home2014, Tinker@Home2015, Tinker@Home2017, Tinker@Home2019, for their help and support through out building the robot and writing this manuscript. Particular thanks to old members Jingsong Peng, Jiacheng Guo and Yilin Zhu. The authors would like to thank teachers Yanxiong E, Xiaoliang Zhu in Youth League Committee of Tsinghua University.
+
 \section*{Contact Info}
-
-	\noindent
-Address: Tsinghua University,Hai Dian, Beijing \\
-Email: jiangyaonju@126.com 
-
+Address: Tsinghua University,Hai Dian, Beijing
+Email: jackeyhuo15@gmail.com
 
 %\bibliography{main.bib}
 \bibliographystyle{IEEEtran}
